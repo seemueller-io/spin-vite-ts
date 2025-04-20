@@ -1,6 +1,6 @@
 # spin-vite-ts
 
-Minimal-ish working example of using vite, itty-router, and spin framework.
+Minimal-ish working example of using vite, itty-router, and spin framework. Building this so I can build an asset handling class for Vike.
 
 
 ### Prerequisites:
