@@ -13,7 +13,7 @@ Minimal-ish working example of using vite, itty-router, and spin framework.
 
 ```
 git clone https://github.com/seemueller-io/spin-vite-ts.git
-spin:dev
+bun spin:dev
 open http://localhost:3000
 ```
 
