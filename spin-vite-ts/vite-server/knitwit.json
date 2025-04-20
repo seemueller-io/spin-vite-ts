@@ -1,0 +1,10 @@
+{
+  "packages": {
+    "@fermyon/wasi-ext": {
+      "witPath": "../../wit",
+      "world": "js-wasi-ext"
+    }
+  },
+  "project": {},
+  "version": 1
+}
