@@ -1,11 +1,7 @@
 // For AutoRouter documentation refer to https://itty.dev/itty-router/routers/autorouter
 import { AutoRouter } from 'itty-router';
-// import { readFileSync } from 'fs';
-// import * as wasext from "@fermyon/wasi-ext/lib/fs";
 
-let router = AutoRouter();
-
-// make a bucket
+const router = AutoRouter();
 
 const ASSETS = {
     async fetch(request: Request) {
@@ -17,7 +13,7 @@ const ASSETS = {
         } else {
             originalUrl.pathname = "/static".concat(originalUrl.pathname)
         }
-        // originalUrl.host = "self";
+        originalUrl.host = "static.spin.internal";
         // originalUrl.port = '';
 
 
@@ -25,9 +21,10 @@ const ASSETS = {
 
         try {
             console.debug(`Forwarding request to: ${assetRequest.url}`);
-            // const file = readFileSync(fullPath); // Read the file using Deno
+
             return fetch(assetRequest)
         } catch (error) {
+
             console.error(`Error reading asset from path ${originalUrl.toString()}:`, error);
             return new Response('Asset not found on disk', {status: 404});
         }
@@ -47,7 +44,6 @@ class AssetService {
     }
 
     async handleStaticAssets(request: Request) {
-        console.log("handleStaticAssets")
         try {
             return this.#env.ASSETS.fetch(request);
             // Handle asset fetching logic
@@ -68,14 +64,13 @@ const createServerContext = (r: Request) => ({
 // Any route that does not return will be treated as a middleware
 // Any unmatched route will return a 404
 router
-    .get('/hello/:name', ({ name }) => `Hello, ${name}!`)
     .get('*', async (r) => {
         // console.log({wasext});
         const { assetService } = createServerContext(r);
         return assetService.handleStaticAssets(r);
     });
 
-//@ts-ignore
+// @ts-ignore - runtime event handler
 addEventListener('fetch', (event: FetchEvent) => {
     event.respondWith(router.fetch(event.request));
 });

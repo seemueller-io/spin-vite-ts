@@ -1,11 +1,9 @@
 const path = require('path');
 const SpinSdkPlugin = require("@fermyon/spin-sdk/plugins/webpack")
-const WasiExtPlugin = require("@fermyon/wasi-ext/plugin")
 
 module.exports = {
     entry: './src/index.ts',
     mode: 'production',
-    stats: 'errors-only',
     experiments: {
         outputModule: true,
     },
@@ -30,7 +28,6 @@ module.exports = {
         }
     },
     plugins: [
-        new WasiExtPlugin(),
         new SpinSdkPlugin()
     ],
     optimization: {

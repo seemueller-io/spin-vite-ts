@@ -12,15 +12,17 @@ component = "vite-server"
 
 [component.vite-server]
 source = "vite-server/dist/vite-server.wasm"
-allowed_outbound_hosts = ["http://self/", "http://127.0.0.1:3000"]
+allowed_outbound_hosts = ["http://self/", "http://127.0.0.1:3000", "http://static.spin.internal:*"]
 
 [component.vite-server.build]
 command = "npm install && npm run build"
 workdir = "vite-server"
 
 [[trigger.http]]
-route = "/static/..."
+route = { private = true }
+
 component = "static"
+
 
 [component.static]
 source = { url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.3.0/spin_static_fs.wasm", digest = "sha256:ef88708817e107bf49985c7cefe4dd1f199bf26f6727819183d5c996baa3d148" }
