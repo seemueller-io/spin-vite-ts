@@ -6,6 +6,7 @@ Minimal-ish working example of using vite, itty-router, and spin framework.
 ### Prerequisites:
 
 - spin
+- bun
 - node
 
 
