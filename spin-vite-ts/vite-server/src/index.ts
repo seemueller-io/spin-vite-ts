@@ -1,5 +1,5 @@
 // For AutoRouter documentation refer to https://itty.dev/itty-router/routers/autorouter
-import { AutoRouter } from 'itty-router';
+import { AutoRouter, error } from 'itty-router';
 
 const router = AutoRouter();
 
@@ -129,5 +129,5 @@ router
 // @ts-ignore - runtime event handler
 addEventListener('fetch', (event: FetchEvent) => {
     // Respond to the request using the router's fetch handler.
-    event.respondWith(router.fetch(event.request));
+    event.respondWith(router.fetch(event.request).catch(error));
 });
